@@ -1,0 +1,64 @@
+.buttons_commerce {
+  color: #ffffff;
+}
+
+ion-item {
+  --border-radius: 0px;
+}
+
+.img_offer {
+  position: relative;
+  height: 200px;
+}
+
+.show_more {
+  position: absolute;
+  right: 10px;
+  top: 195px;
+  color: #ffffff;
+  text-shadow: 0px 0px 10px #000000;
+  z-index: 10;
+}
+
+.b_fechas {
+  font-size: 13px;
+}
+
+.warning_coords {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.list_info_commerce {
+  position: relative;
+}
+
+.close_gallery {
+  position: absolute;
+  right: 5%;
+  top: -15px;
+  width: 30px;
+  height: 30px;
+}
+
+.text_bio_commerce {
+  vertical-align: middle;
+}
+
+
+
+.details_tab3 {
+  font-size: 13px;
+}
+
+.item.sc-ion-label-md-h,
+.item .sc-ion-label-md-h {
+  white-space: normal;
+}
+
+.prod_top {
+  padding-left: 1rem;
+  font-size: 14px;
+
+}

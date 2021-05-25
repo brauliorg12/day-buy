@@ -1,0 +1,7 @@
+{
+  "name": "day-to-buy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

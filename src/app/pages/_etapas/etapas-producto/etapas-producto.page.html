@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/publicaciones-list"></ion-back-button>
+
+      <ion-title>Etapas de la Publicación</ion-title>
+      <ion-icon name="calendar-outline" slot="icon-only"></ion-icon>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row *ngIf="status === 'loading'" class="center ion-text-center">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+
+  <div *ngIf="status === 'ok'">
+    <!--------------------------------------------------------------------------------------------------------------->
+
+    <ion-col size="12" class="card_form">
+
+      <ion-item lines="none">
+        <ion-thumbnail>
+          <img [src]="'https://vps-1663776-x.dattaweb.com/' + producto.img" class="img_commerce_actual_g" />
+        </ion-thumbnail>
+
+        <ion-label color="primary" class="prod_top">Publicación:
+          <p><b>{{producto.nombre}}</b></p>
+        </ion-label>
+      </ion-item>
+      <ion-item-divider class="divider"></ion-item-divider>
+
+      <div class="info ion-padding">
+        <ion-text color="primary">
+          Listado de etapas de esta publicación:
+        </ion-text>
+      </div>
+
+      <ng-container *ngIf="status_etapas === 'loading'">
+        <ion-row class="ion-text-center">
+          <br>
+          <ion-col size="12" class="ion-padding">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </ion-col>
+        </ion-row>
+      </ng-container>
+
+      <ng-container *ngIf="status_etapas === 'none'">
+        <div class="ion-text-left ion-padding">
+          <ion-label class="label_add " color="medium">
+            <b>No hay Etapas agregadas!</b>
+          </ion-label>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="status_etapas === 'ok'">
+        <ng-container *ngFor="let offer of etapas; let i = index" class="pointer ion-text-center">
+
+          <ion-item>
+
+            <ion-label>
+              <!-- {{i + 1}} -->
+            <p color="medium">
+              desde: <b class="b_fechas">{{offer.fecha_ini_etapa | date: 'h:mm a'}} {{offer.fecha_ini_etapa | date: 'fullDate'}}</b>
+            </p>
+
+            <p color="medium">
+              hasta: <b class="b_fechas">{{offer.fecha_fin_etapa | date: 'h:mm a'}} {{offer.fecha_fin_etapa | date: 'fullDate'}}</b>
+            </p>
+
+            <p *ngIf="offer.stock >= 8">stock: <ion-text color="success"><b>+{{offer.stock}}</b></ion-text></p>
+            <p *ngIf="offer.stock >= 5 && offer.stock < 8">stock: <ion-text color="warning"><b>+{{offer.stock}}</b>
+                </ion-text></p>
+            <p *ngIf="offer.stock <= 4 && offer.stock > 0">stock: <ion-text color="primary"><b>+{{offer.stock}}</b>
+                </ion-text></p>
+            <p *ngIf="offer.stock <= 0">Stock: <ion-text><b>+{{offer.stock}}</b></ion-text></p>
+
+            <p *ngIf="offer.descuento >= 8">Descuento: <ion-text color="success"><b>{{offer.descuento}}%</b></ion-text>
+            </p>
+            <p *ngIf="offer.descuento >= 5 && offer.descuento < 8">Descuento: <ion-text color="warning">
+              <b>{{offer.descuento}}%</b>
+                </ion-text></p>
+            <p *ngIf="offer.descuento <= 4 && offer.descuento > 0"><b>Descuento: <ion-text color="primary">
+                  {{offer.descuento}}%
+                </ion-text></b></p>
+            <p *ngIf="offer.descuento <= 0"><b>Descuento: <ion-text>{{offer.descuento}}%</ion-text></b></p>
+          </ion-label>
+
+          <ion-buttons>
+            <ion-button color="primary">
+              <ion-icon name="ellipsis-horizontal-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          </ion-item>
+
+
+        </ng-container>
+      </ng-container>
+
+    </ion-col>
+
+    <!--------------------------------------------------------------------------------------------------------------->
+
+  </div>
+
+
+</ion-content>
+
+<!--<ion-footer *ngIf="status === 'ok' && status_2 === 'ok'">-->
+<ion-footer *ngIf="status === 'ok' || status === 'cero'">
+  <ion-row>
+    <ion-col size="12">
+      <ion-button expand="block" shape="round" (click)="addNew(producto._id)" color="primary">
+        <b>Nueva Etapa</b>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

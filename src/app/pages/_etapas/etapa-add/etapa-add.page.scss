@@ -1,0 +1,294 @@
+.img_add {
+  margin-top: 2rem;
+  max-height: 120px;
+  max-width: 120px;
+  margin-bottom: 1rem;
+  min-width: 120px;
+}
+
+.icon_view {
+  vertical-align: middle;
+}
+
+ion-col {
+  padding: 0px !important;
+}
+
+.spinner-crescent {
+  color: #ffffff !important;
+}
+
+.div_br {
+  padding: 1rem;
+}
+
+.text_add_o {
+  font-size: 1.1rem;
+}
+
+input {
+  text-align: left;
+  border: none;
+  min-width: 350px;
+}
+
+ion-item {
+  --border-radius: 0px;
+}
+
+.first_icons {
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  margin: 0.1rem;
+}
+
+.activated_first {
+  background-color: rgb(255, 255, 255);
+}
+
+.label_first {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.label_btn_first {
+  font-size: 12px;
+}
+
+// ripple effect
+.ion-activatable {
+  position: relative;
+  overflow: hidden;
+}
+
+// Incremento
+.icon_add {
+  font-size: 35px;
+}
+
+.item_etapa {
+  width: 100%;
+}
+
+.calculos {
+  width: 50px;
+}
+
+.input_add {
+  text-align: center;
+  font-size: 20px;
+  max-width: 80px;
+}
+
+.col_file {
+  margin-top: 35px;
+}
+
+.label_fecha {
+  max-width: 25px;
+}
+
+.icon_pay {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.col_img {
+  margin-top: -20px;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.img_ticket {
+  height: 150px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cupon_ticket_card {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+
+.cupon_ticket_last {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+  padding: 0.5rem;
+}
+
+.text_cant {
+  padding: 0.2rem;
+}
+
+.btn_pub {
+  border: 2px solid white !important;
+  border-radius: 15px !important;
+  margin: 0.5rem;
+}
+
+.tare_des {
+  min-height: 140px;
+  height: 140px !important;
+}
+
+.tarea_key {
+  min-height: 90px;
+  height: 90px !important;
+}
+
+ion-grid {
+  padding: 0 !important;
+}
+
+.text_cat {
+  font-weight: 300;
+}
+
+.icon_check {
+  vertical-align: middle;
+}
+
+.item_cat {
+  margin-top: -0.7rem;
+}
+
+ion-card {
+  border-radius: 5px !important;
+  margin: 5px;
+}
+
+.list_no_lines {
+  font-size: 14px;
+  padding-left: 1rem;
+}
+
+.list_no_lines_uno {
+  font-size: 14px;
+  color: #737373;
+  padding-bottom: 0.2rem;
+}
+
+.agotado {
+  color: rgba(199, 47, 47, 0.924);
+  padding-top: 0.2rem;
+  padding-left: 0.2rem;
+}
+
+.fecha_desc_text,
+.cantidad_desc_text {
+  color: rgb(117, 117, 117);
+  font-size: 11px;
+}
+
+#cart-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: orangered;
+  border: 0.5px solid #ffffff;
+  z-index: 9;
+}
+
+.icon_fecha {
+  font-size: 25px;
+}
+
+.p_f {
+  position: absolute;
+  right: -2px;
+  bottom: 0;
+}
+
+.text_commerce_desc {
+  position: relative;
+  text-align: left;
+  display: flex;
+}
+
+.text_desc {
+  text-align: left;
+  display: flex;
+}
+
+.agotado {
+  color: rgba(199, 47, 47, 0.924);
+  padding-top: 0.2rem;
+  padding-left: 0.2rem;
+}
+
+.icon_input {
+  font-size: 25px;
+  vertical-align: middle;
+}
+
+.icon_error {
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.error {
+  background-color: #f04141ea;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+  margin-top: -2px;
+  display: block;
+}
+
+.text_success {
+  background-color: #4bba76;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+  margin-top: -2px;
+  display: block;
+}
+
+.item-interactive,
+.item-lines-full {
+  --border-width: 0px !important;
+}
+
+.icon_start_offer {
+  margin-inline-end: 12px !important;
+}
+
+.font_btn_add {
+  text-transform: none;
+  font-size: 15px;
+}
+
+.col_addmore {
+  justify-content: center;
+  display: grid;
+}
+
+.icons_new_home {
+  width: 80px;
+  height: 80px;
+}
+
+.icon_footer_t {
+  // font-weight: bold;
+  padding: 1rem;
+  display: block;
+}
+
+.icon_footer_t_p {
+  // font-weight: bold;
+  padding: 0.6rem;
+  display: block;
+  color: #ffffff;
+}
+
+.btn_examples {
+  position: absolute;
+  bottom: 12px;
+  right: 0px;
+  left: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 130px;
+  height: 30px;
+}

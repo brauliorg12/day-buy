@@ -1,0 +1,406 @@
+.div_logo {
+  display: flex;
+  text-align: center;
+}
+
+.text_codi {
+  position: absolute;
+  left: 42%;
+}
+
+.pick-avatar {
+  width: 80px;
+  opacity: 0.3;
+}
+
+.info_filter {
+  font-size: 17px;
+  padding: 0.8rem;
+  margin: 1rem;
+}
+
+.pick-avatar-seleccionado {
+  transition: opacity 0.5s linear;
+  opacity: 1 !important;
+}
+
+.img_codi {
+  width: 80px;
+  height: 80px;
+}
+
+.msg-content {
+  float: left;
+  position: relative;
+  background: #0f4994;
+  color: #fff;
+  margin-top: 1rem;
+  border-radius: 10px;
+  padding: 0.3rem;
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  :before {
+    content: "";
+    position: absolute;
+    background: transparent;
+    width: 10px;
+    height: 8px;
+    left: -10px;
+    top: 9px;
+    box-sizing: border-box;
+    border-right: 10px solid #0f4994;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+}
+
+.grid_login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.icon_fb {
+  color: rgb(66, 103, 178) !important;
+  margin-bottom: 2rem;
+  min-width: 250px;
+}
+
+.icon_go {
+  color: rgb(213, 76, 63) !important;
+  margin-top: 1rem;
+}
+
+.text_login_n {
+  font-size: 0.7rem;
+}
+
+.icon_error {
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.error {
+  font-size: 12px;
+}
+
+.text_login {
+  font-size: 14px;
+}
+
+.form_r {
+  font-size: 14px;
+}
+
+.text_login_first {
+  font-size: 1.1rem;
+  display: block;
+}
+
+.text_login_second {
+  font-size: 1rem;
+  display: block;
+}
+
+.text_login_y {
+  font-size: 14px;
+}
+
+.col_top {
+  background-color: aliceblue;
+}
+
+.icon_size_home {
+  position: relative;
+  width: 35px;
+  height: 25px;
+}
+.icon_text_login {
+  font-size: 13px;
+}
+
+// PULSE
+
+.pulse1 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  border: 3px solid rgb(66, 103, 178);
+
+  -webkit-animation: pulsejg1 3s linear infinite;
+  -moz-animation: pulsejg1 3s linear infinite;
+  animation: pulsejg1 3s linear infinite;
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+  border-radius: 999px;
+  -webkit-box-shadow: inset 0px 0px 15px 10px rgb(66, 103, 178);
+  -moz-box-shadow: inset 0px 0px 15px 10px rgb(66, 103, 178);
+  box-shadow: inset 0px 0px 15px 10px rgb(66, 103, 178);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.pulse2 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  opacity: 0;
+  border: 1px solid rgb(29, 40, 194);
+
+  -webkit-animation: pulsejg2 3s linear infinite;
+  -moz-animation: pulsejg2 3s linear infinite;
+  animation: pulsejg2 3s linear infinite;
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+  border-radius: 999px;
+  -webkit-box-shadow: inset 0px 0px 12px 5px rgb(66, 103, 178);
+  -moz-box-shadow: inset 0px 0px 12px 5px rgb(66, 103, 178);
+  box-shadow: inset 0px 0px 12px 5px rgb(66, 103, 178);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@-webkit-keyframes pulsejg1 {
+  0% {
+    -webkit-transform: scale(0.6);
+    opacity: 0;
+  }
+
+  50% {
+    -webkit-transform: scale(0.6);
+    opacity: 0;
+  }
+
+  60% {
+    -webkit-transform: scale(0.9);
+    opacity: 0.2;
+  }
+
+  70% {
+    -webkit-transform: scale(1.1);
+    opacity: 0.35;
+  }
+
+  80% {
+    -webkit-transform: scale(1.25);
+    opacity: 0.2;
+  }
+
+  100% {
+    -webkit-transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes pulsejg1 {
+  0% {
+    -moz-transform: scale(0.6);
+    opacity: 0;
+  }
+
+  50% {
+    -moz-transform: scale(0.6);
+    opacity: 0;
+  }
+
+  60% {
+    -moz-transform: scale(0.9);
+    opacity: 0.2;
+  }
+
+  70% {
+    -moz-transform: scale(1.1);
+    opacity: 0.35;
+  }
+
+  80% {
+    -moz-transform: scale(1.25);
+    opacity: 0.2;
+  }
+
+  100% {
+    -moz-transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulsejg1 {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(0.9);
+    opacity: 0.1;
+  }
+
+  70% {
+    transform: scale(1.1);
+    opacity: 0.25;
+  }
+
+  80% {
+    transform: scale(1.25);
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes pulsejg2 {
+  0% {
+    -webkit-transform: scale(0.6);
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: scale(0.8);
+    opacity: 0.05;
+  }
+
+  50% {
+    -webkit-transform: scale(1);
+    opacity: 0.1;
+  }
+
+  60% {
+    -webkit-transform: scale(1.1);
+    opacity: 0.3;
+  }
+
+  80% {
+    -webkit-transform: scale(1.2);
+    opacity: 0.1;
+  }
+
+  100% {
+    -webkit-transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes pulsejg2 {
+  0% {
+    -moz-transform: scale(0.6);
+    opacity: 0;
+  }
+
+  40% {
+    -moz-transform: scale(0.8);
+    opacity: 0.05;
+  }
+
+  50% {
+    -moz-transform: scale(1);
+    opacity: 0.1;
+  }
+
+  60% {
+    -moz-transform: scale(1.1);
+    opacity: 0.3;
+  }
+
+  80% {
+    -moz-transform: scale(1.2);
+    opacity: 0.1;
+  }
+
+  100% {
+    -moz-transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes pulsejg2 {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  40% {
+    transform: scale(0.8);
+    opacity: 0.05;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 0.1;
+  }
+
+  60% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+
+  80% {
+    transform: scale(1.2);
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.divider_normal {
+  min-height: 1px;
+}
+
+// divider
+.divider {
+  display: flex;
+
+  &:before,
+  &:after {
+    content: "";
+    flex: 1;
+  }
+}
+
+// Base line
+.line {
+  align-items: center;
+
+  &:before,
+  &:after {
+    height: 1px;
+    margin: 0 1em;
+  }
+}
+
+.one-line {
+  &:before,
+  &:after {
+    background: #b5b5b5;
+  }
+}

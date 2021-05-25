@@ -1,0 +1,25 @@
+<div id="clockdiv">
+    <div *ngIf="displayTime.days">
+        <span *ngIf="displayTime.days > 0">{{displayTime.days}}</span>
+        <span *ngIf="displayTime.days <= 0">0</span>
+        <div class="smalltext">Días</div>
+    </div>
+
+    <div>
+        <span *ngIf="displayTime.hours > 0">{{displayTime.hours}}</span>
+        <span *ngIf="displayTime.hours <= 0">0</span>
+        <div class="smalltext">Horas</div>
+    </div>
+
+    <div>
+        <span *ngIf="displayTime.minutes > 0" class="minutes">{{displayTime.minutes}}</span>
+        <span *ngIf="displayTime.minutes <= 0">0</span>
+        <div class="smalltext">Minutos</div>
+    </div>
+
+    <div>
+        <span *ngIf="displayTime.seconds > 0" class="seconds">{{displayTime.seconds}}</span>
+        <span *ngIf="displayTime.seconds <= 0">0</span>
+        <div class="smalltext">Segundos</div>
+    </div>
+</div>

@@ -1,0 +1,251 @@
+<ion-header *ngIf="userReady === 'false'">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab/inicio"></ion-back-button>
+      <ion-title>Iniciar Sesión</ion-title>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+
+
+  <div *ngIf="userReady === 'false'">
+
+    <ion-grid class="grid_login">
+
+      <ng-container *ngIf="fborlogin === 'login' && touchL">
+        <form (ngSubmit)="login(fLogin)" #fLogin="ngForm">
+          <ion-row>
+            <ion-col>
+              <ion-list>
+                <ion-item lines="inset">
+                  <ion-label color="primary">Email: </ion-label>
+                  <ion-input #inputEmailL name="email" type="email" autocomplete="email" [(ngModel)]="loginUser.email"
+                    required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></ion-input>
+                </ion-item>
+
+                <ion-item lines="inset">
+                  <ion-label color="primary">Contraseña: </ion-label>
+                  <ion-input name="password" [type]="passtype" autocomplete="current-password"
+                    [(ngModel)]="loginUser.password" required></ion-input>
+                  <ion-icon *ngIf="passtype === 'password'" name="eye-off-outline" (click)="changeTypeText()">
+                  </ion-icon>
+                  <ion-icon *ngIf="passtype === 'text'" name="eye-outline" (click)="changeTypePass()"></ion-icon>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="primary" fill="outline" shape="round"
+                *ngIf="loginUser.email && loginUser.password && fLogin.valid">
+                Ingresar
+              </ion-button>
+
+              <ion-button color="primary" fill="outline" shape="round"
+                *ngIf="!loginUser.email || !loginUser.password || !fLogin.valid" disabled>
+                Ingresar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+
+          <br>
+
+          <ion-button (click)="backNewL()" fill="outline" shape="round">
+            <ion-text>Volver</ion-text>
+          </ion-button>
+
+        </form>
+      </ng-container>
+
+
+      <ng-container *ngIf="fborlogin === 'fb' && !touchR && !touchL">
+
+
+        <br>
+
+        <!-- //// WEB -->
+        <ng-container *ngIf="web">
+          <ion-row>
+            <ion-col>
+              <ion-button icon-right (click)="registerNew()" fill="outline" shape="round" color="none"
+                fill="outline">
+                <b>Registrarme</b>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+
+        <!-- //// APP -->
+        <ng-container>
+          <!-- <ion-row>
+            <ion-col>
+              <ion-button icon-right (click)="loginFacebook()" fill="outline" shape="round" color="none" class="icon_fb"
+                fill="outline">
+                <ion-icon name="logo-facebook" class="icon"></ion-icon>&nbsp;
+                <b>Ingresar con Facebook</b>
+                <div class="pulse1"></div>
+                <div class="pulse2"></div>
+              </ion-button>
+            </ion-col>
+          </ion-row> -->
+
+          <!-- <ion-row>
+            <ion-col>
+              <ion-button *ngIf="!isGoogleLogin" (click)="loginGoogle()" fill="outline" shape="round" color="none" class="icon_go"
+                fill="outline">
+                <ion-icon name="logo-google" class="icon"></ion-icon>&nbsp;
+                <b>Ingresar con Google</b>
+              </ion-button>
+            </ion-col>
+          </ion-row> -->
+        </ng-container>
+
+        <!-- <div class="divider line one-line">ó</div> -->
+
+
+
+
+        <!-- //// //////////////////////////////////////////////////////////////////////// -->
+        <!-- <div *ngIf="isGoogleLogin">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title class="ion-text-center"><b>{{user.displayName}}</b></ion-card-title>
+
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-img [src]="user.photoURL" style="border-radius: 1px;"></ion-img>
+              <ion-item>
+                <ion-label>email:</ion-label>
+                <span>{{user.email}}</span>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-button expand="block" (click)="logout2()" color="danger" *ngIf="isGoogleLogin">
+            Log Out
+          </ion-button>
+        </div> -->
+
+        <!-- //// //////////////////////////////////////////////////////////////////////// -->
+
+        <!-- //// WEB -->
+        <ng-container *ngIf="web">
+          <ion-row>
+            <ion-col>
+              <ion-button (click)="fbToLogin()" fill="outline" shape="round">
+                <ion-text color="primary"><b>Iniciar sesión</b></ion-text>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+
+        <!-- //// APP -->
+        <ng-container *ngIf="!web">
+          <ion-row>
+            <ion-col>
+              <ion-button (click)="registerNew()" fill="outline" shape="round" color="medium">
+                <ion-text color="primary"><b>Registrarme</b></ion-text>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-text class="text_login_y pointer">¿Ya tenés cuenta? <ion-text color="primary"><b
+                    (click)="fbToLogin()">Iniciar
+                    sesión</b></ion-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+      </ng-container>
+
+
+    </ion-grid>
+  </div>
+
+  <div *ngIf="userReady === 'false' && touchR">
+    <ion-grid>
+
+      <form [formGroup]="registerUser" novalidate>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item lines="inset">
+                <ion-label color="primary" class="form_r">Email:</ion-label>
+                <ion-input #inputEmailR type="email" autocomplete="email" formControlName="email" required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></ion-input>
+              </ion-item>
+
+              <ion-item lines="inset">
+                <ion-label color="primary" class="form_r">Nombre:</ion-label>
+                <ion-input type="text" formControlName="nombre" autocomplete="name" required autocapitalize="on">
+                </ion-input>
+              </ion-item>
+
+              <ion-item lines="inset">
+                <ion-label color="primary" class="form_r">Contraseña:</ion-label>
+                <ion-input [type]="passtype" autocomplete="new-password" formControlName="password" required>
+                </ion-input>
+                <ion-icon *ngIf="passtype === 'password'" name="eye-off-outline" (click)="changeTypeText()"></ion-icon>
+                <ion-icon *ngIf="passtype === 'text'" name="eye-outline" (click)="changeTypePass()"></ion-icon>
+              </ion-item>
+
+              <ion-item lines="inset">
+                <ion-label color="primary" class="form_r">Repetir Contraseña:</ion-label>
+                <ion-input [type]="passtype" autocomplete="new-password" formControlName="password_c" required>
+                </ion-input>
+              </ion-item>
+
+              <ion-text
+                *ngIf="registerUser.get('password_c').errors && (registerUser.get('password_c').dirty || registerUser.get('password_c').touched)"
+                color="danger" class="error">&nbsp;
+                <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Las contraseñas no coinciden
+              </ion-text>
+
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <br>
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="primary" shape="round" (click)="registro()" *ngIf="registerUser.valid">
+              Crear usuario
+            </ion-button>
+
+            <ion-button type="submit" color="primary" shape="round" *ngIf="!registerUser.valid" disabled>
+              Crear usuario
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <br>
+
+        <ion-button (click)="backNewR()" fill="outline" shape="round">
+          <ion-text>Volver</ion-text>
+        </ion-button>
+      </form>
+    </ion-grid>
+
+  </div>
+
+</ion-content>
+
+<!-- <ion-footer class="filters">
+  <ion-row *ngIf="userReady === 'false'" class="pointer ion-text-center">
+    <ion-col>
+      <ion-text color="tertiary" class="text_login_n ion-padding">Al entrar en CODI significa que usted acepta nuestros
+        <b routerLink="/terminos">Términos y
+          Condiciones</b> y <b routerLink="/politica">Política de Privacidad.</b>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+</ion-footer> -->

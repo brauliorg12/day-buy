@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+
+      <ion-title>Galería de la Publicación</ion-title>
+      <ion-icon slot="icon-only" name="images-outline"></ion-icon>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row *ngIf="moderator === 'loading'" class="spinnerCenter ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </ion-row>
+
+  <form *ngIf="moderator === 'ok'" [formGroup]="commerceForm" novalidate>
+    <!--------------------------------------------------------------------------------------------------------------->
+
+    <ion-col size="12" class="card_form">
+
+      <ion-item lines="none">
+        <ion-thumbnail>
+          <img [src]="'https://vps-1663776-x.dattaweb.com/' + commerce.img" class="img_commerce_actual_g" />
+        </ion-thumbnail>
+
+        <ion-label color="tertiary" class="prod_top">Publicación: <b>{{commerce.titulo}}</b>
+        </ion-label>
+      </ion-item>
+      <ion-item-divider class="divider"></ion-item-divider>
+
+      <div class="info ion-padding">
+        <ion-text color="tertiary">
+          Te sugerimos cargar lindas fotos, bien iluminadas y enfocadas. Para mejorar la calidad de tu galería te
+          recomendamos probar esta herramienta gratuita. <ion-text (click)="goToLink('https://www.remove.bg')"
+            class="text_sub">remove.bg</ion-text>
+        </ion-text>
+      </div>
+
+      <ion-grid class="grid_images">
+        <ion-row>
+          <ion-col size="6" class="col_img">
+            <input type="text" hidden class="d-none" #photoInput formControlName="img_2">
+            <ion-thumbnail class="img_commerce_actual_g">
+              <ion-img *ngIf="img_2 !== '' && !photoSelected2"
+                [src]="'https://vps-1663776-x.dattaweb.com/' + commerce.img_2" class="img_normal agotado"
+                (click)="photoInput.click()" (click)="openModalImg()">
+              </ion-img>
+
+
+              <ion-img *ngIf="img_2 === '' || img_2 !== '' && photoSelected2"
+                [src]="photoSelected2 || 'assets/icon/add.svg'" class="img_normal agotado" (click)="photoInput.click()"
+                (click)="openModalImg()">
+              </ion-img>
+
+              <ng-container *ngIf="!close3">
+                <ion-icon *ngIf="img_2 !== '' && !photoSelected2 && close2" name="close-circle" class="close_gallery"
+                  color="tertiary" (click)="delete2()"></ion-icon>
+                <ion-icon *ngIf="img_2 !== '' && photoSelected2 && close2" name="close-circle" class="close_gallery"
+                  color="tertiary" (click)="delete2()"></ion-icon>
+              </ng-container>
+            </ion-thumbnail>
+
+          </ion-col>
+
+          <ion-col size="6" class="col_img" *ngIf="img_2 !== ''">
+            <input type="text" hidden class="d-none" #photoInput3 formControlName="img_3">
+            <ion-thumbnail class="img_commerce_actual_g">
+              <ion-img *ngIf="img_3 !== '' && !photoSelected3"
+                [src]="'https://vps-1663776-x.dattaweb.com/' + commerce.img_3" class="img_normal agotado"
+                (click)="photoInput.click()" (click)="openModalImg3()">
+              </ion-img>
+
+
+              <ion-img *ngIf="img_3 === '' || img_3 !== '' && photoSelected3"
+                [src]="photoSelected3 || 'assets/icon/add.svg'" class="img_normal agotado" (click)="photoInput.click()"
+                (click)="openModalImg3()">
+              </ion-img>
+
+              <ng-container *ngIf="!close4">
+                <ion-icon *ngIf="img_3 !== '' && !photoSelected3 && close3" name="close-circle" class="close_gallery"
+                  color="tertiary" (click)="delete3()"></ion-icon>
+                <ion-icon *ngIf="img_3 !== '' && photoSelected3 && close3" name="close-circle" class="close_gallery"
+                  color="tertiary" (click)="delete3()"></ion-icon>
+              </ng-container>
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+
+        <br>
+
+        <ion-row>
+          <ion-col size="6" class="col_img" *ngIf="img_3 !== ''">
+            <input type="text" hidden class="d-none" #photoInput4 formControlName="img_4">
+            <ion-thumbnail class="img_commerce_actual_g">
+              <ion-img *ngIf="img_4 !== '' && !photoSelected4"
+                [src]="'https://vps-1663776-x.dattaweb.com/' + commerce.img_4" class="img_normal agotado"
+                (click)="photoInput.click()" (click)="openModalImg4()">
+              </ion-img>
+
+
+              <ion-img *ngIf="img_4 === '' || img_4 !== '' && photoSelected4"
+                [src]="photoSelected4 || 'assets/icon/add.svg'" class="img_normal agotado" (click)="photoInput.click()"
+                (click)="openModalImg4()">
+              </ion-img>
+
+              <ng-container *ngIf="!close5">
+                <ion-icon *ngIf="img_4 !== '' && !photoSelected4 && close4" name="close-circle" class="close_gallery"
+                  color="tertiary" (click)="delete4()"></ion-icon>
+                <ion-icon *ngIf="img_4 !== '' && photoSelected4 && close4" name="close-circle" class="close_gallery"
+                  color="tertiary" (click)="delete4()"></ion-icon>
+              </ng-container>
+            </ion-thumbnail>
+          </ion-col>
+
+          <ion-col size="6" class="col_img" *ngIf="img_4 !== ''">
+            <input type="text" hidden class="d-none" #photoInput5 formControlName="img_5">
+            <ion-thumbnail class="img_commerce_actual_g">
+              <ion-img *ngIf="img_5 !== '' && !photoSelected5"
+                [src]="'https://vps-1663776-x.dattaweb.com/' + commerce.img_5" class="img_normal agotado"
+                (click)="photoInput.click()" (click)="openModalImg5()">
+              </ion-img>
+
+
+              <ion-img *ngIf="img_5 === '' || img_5 !== '' && photoSelected5"
+                [src]="photoSelected5 || 'assets/icon/add.svg'" class="img_normal agotado" (click)="photoInput.click()"
+                (click)="openModalImg5()">
+              </ion-img>
+              <ion-icon *ngIf="img_5 !== '' && !photoSelected5 && close5" name="close-circle" class="close_gallery"
+                color="tertiary" (click)="delete5()"></ion-icon>
+              <ion-icon *ngIf="img_5 !== '' && photoSelected5 && close5" name="close-circle" class="close_gallery"
+                color="tertiary" (click)="delete5()"></ion-icon>
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-col>
+
+    <!--------------------------------------------------------------------------------------------------------------->
+
+  </form>
+
+
+</ion-content>

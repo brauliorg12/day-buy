@@ -1,0 +1,190 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-title>Nueva Etapa</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <!-- <div class="ion-float-right">
+        <ion-tab-button (click)="presentPopover($event)">
+          <ion-icon name="help" class="help_toolbar"></ion-icon>
+          <ion-text class="help_toolbar">Ayuda</ion-text>
+        </ion-tab-button>
+      </div> -->
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+<ion-content *ngIf="status == 'loading'">
+  <ion-row class="spinnerCenter">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+</ion-content>
+
+<ion-content *ngIf="status === 'ok'">
+
+
+  <form [formGroup]="etapaForm" novalidate>
+
+    <ion-grid>
+      <ion-row>
+
+
+        <!---------------------------------------------- SLIDE TITULO Y DESCRIPCION -------------------------------------------->
+
+        <ion-col size="12" class="card_form">
+
+          <ion-card>
+            <ion-item lines="none">
+              <label>
+                <ion-label class="list_no_lines_uno"><b>Desde / Hasta:</b>
+                </ion-label>
+
+                <input [owlDateTimeTrigger]="dt13" [selectMode]="'range'" [owlDateTime]="dt13" formControlName="fecha_ini_etapa"
+                  [(ngModel)]="selectedMoments"  (ngModelChange)="setFecha()">
+                <owl-date-time #dt13></owl-date-time>
+              </label>
+            </ion-item>
+
+            <ion-text
+              *ngIf="etapaForm.get('fecha_ini_etapa').errors && (etapaForm.get('fecha_ini_etapa').dirty || etapaForm.get('fecha_ini_etapa').touched)"
+              class="error">&nbsp;
+              <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mínimo 5 caracteres
+            </ion-text>
+          </ion-card>
+
+          <!-- Stock -->
+          <ion-card class="card_add">
+            <ion-list no-lines>
+              <ion-label class="list_no_lines"><b>Stock de etapa: </b>
+                <ion-text *ngIf="!etapaForm.get('stock').valid" color="danger"> *
+                </ion-text>
+              </ion-label>
+            </ion-list>
+
+            <ion-item class="ion-text-center item_etapa">
+              <div *ngIf="etapaForm.get('stock').value > 1" class="ion-activatable ion-text-center calculos">
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+                <ion-icon name="remove-circle" color="primary" class="icon_add" (click)="decrement()"></ion-icon>
+              </div>
+
+              <div *ngIf="etapaForm.get('stock').value <= 1" class="ion-text-center calculos">
+                <ion-icon name="remove-circle" class="icon_add" color="medium"></ion-icon>
+              </div>
+
+              <ion-input #input_s type="tel" pattern="\d*" maxlength="4" minlength="1" class="input_add"
+                value="etapaForm.get('stock').value" formControlName="stock" (ionChange)="check_stock()">
+              </ion-input>
+
+              <div class="ion-activatable ion-text-center calculos">
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+                <ion-icon name="add-circle" color="primary" class="icon_add" (click)="increment()"></ion-icon>
+              </div>
+            </ion-item>
+
+            <ion-text *ngIf="!etapaForm.get('stock').valid" class="error">&nbsp;
+              <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Sólo números
+            </ion-text>
+
+            <ion-text *ngIf="etapaForm.get('stock').value === null" color="danger" class="error">&nbsp;
+              <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mayor a 0.
+            </ion-text>
+          </ion-card>
+
+          <!-- Descuento -->
+          <ion-card class="card_add">
+            <ion-list no-lines>
+              <ion-label class="list_no_lines"><b>Descuento de etapa en (% porcentaje): </b>
+                <ion-text *ngIf="!etapaForm.get('descuento').valid" color="danger"> *
+                </ion-text>
+              </ion-label>
+            </ion-list>
+
+            <ion-item>
+              <div *ngIf="etapaForm.get('descuento').value > 1" class="ion-activatable ion-text-center calculos">
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+                <ion-icon name="remove-circle" color="primary" class="icon_add" (click)="decrementD()"></ion-icon>
+              </div>
+
+              <div *ngIf="etapaForm.get('descuento').value <= 1" class="ion-text-center calculos">
+                <ion-icon name="remove-circle" class="icon_add" color="medium"></ion-icon>
+              </div>
+
+              <ion-input #input_desc type="tel" pattern="\d*" maxlength="2" minlength="1" class="input_add"
+                value="etapaForm.get('descuento').value" formControlName="descuento" (ionChange)="check_descuento()">
+              </ion-input>
+
+              <div class="ion-activatable ion-text-center calculos">
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+                <ion-icon name="add-circle" color="primary" class="icon_add" (click)="incrementD()"></ion-icon>
+              </div>
+            </ion-item>
+
+            <ion-text *ngIf="!etapaForm.get('descuento').valid" class="error">&nbsp;
+              <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Sólo números menor a 100
+            </ion-text>
+
+            <ion-text *ngIf="etapaForm.get('descuento').value === null" color="danger" class="error">&nbsp;
+              <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mayor a 0.
+            </ion-text>
+          </ion-card>
+
+
+          <!--------------------------------------------- SLIDE PRECIO OFERTA ------------------------------------------------>
+          <ion-card>
+            <ion-list no-lines>
+              <ion-label class="list_no_lines"><b>Estado: &nbsp;
+                  <ion-text *ngIf="etapaForm.get('estado').value === true" color="primary"><b>Activado</b></ion-text>
+                  <ion-text *ngIf="etapaForm.get('estado').value === false">Desactivado</ion-text>
+                </b>
+              </ion-label>
+            </ion-list>
+
+            <ion-item lines="none">
+              <ion-toggle #input_toggle formControlName="estado" (ionChange)="statusCheck()"></ion-toggle>
+            </ion-item>
+          </ion-card>
+
+          <!------ Notas -->
+          <ion-card>
+            <ion-item lines="none">
+              <ion-label position="floating">
+                <ion-text color="primary"><b>Notas: </b></ion-text>
+              </ion-label>
+              <ion-textarea type="text" formControlName="notas" autocapitalize="on" autoGrow="true"
+                placeholder="escriba notas puntuales para recordatorios.">
+              </ion-textarea>
+            </ion-item>
+          </ion-card>
+          <br><br>
+
+          <ion-button *ngIf="etapaForm.valid" shape="round" size="large" expand="block" class="btn_pub"
+            (click)="createEtapa()">
+            <div class="ion-text-center pointer">
+              <ion-text class="icon_footer_t_p" color="primary"><b>Publicar</b></ion-text>
+            </div>
+          </ion-button>
+
+          <ion-button *ngIf="!etapaForm.valid" (click)="pub_incompleta()" shape="round" size="large" expand="block"
+            class="btn_pub">
+            <div class="ion-text-center pointer">
+              <ion-text class="icon_footer_t_p" color="primary"><b>Publicar</b></ion-text>
+            </div>
+          </ion-button>
+
+
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

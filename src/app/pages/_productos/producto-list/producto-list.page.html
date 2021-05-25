@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>Publicaciones</ion-title>
+    </ion-buttons>
+
+    <div class="ion-float-right" *ngIf="status === 'ok' || status === 'cero'">
+      <ion-tab-button (click)="addNew()">
+        <ion-icon name="add" color="light"></ion-icon>
+        <ion-text color="light">Nueva</ion-text>
+      </ion-tab-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+
+  <!------ VENDEDOR ------>
+  <ion-buttons *ngIf="status === 'ok'">
+    <ion-searchbar placeholder="Buscar" [(ngModel)]="searchText" animated></ion-searchbar>
+    <ion-button (click)="recargarms(event)">
+      <ion-icon slot="icon-only" name="refresh" color="primary"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+  <ng-container *ngIf="status === 'loading'">
+    <ion-row class="center">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'cero'">
+    <ion-label class="label_add spinnerCenter" color="medium">
+      <b>No hay Publicaciones agregadas!</b>
+    </ion-label>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'ok'">
+    <ng-container
+      *ngFor="let pub of publicaciones | productFilter: {descripcion: searchText, nombre: searchText, precio: searchText}">
+      <ion-row class="pointer ion-text-center">
+
+        <ion-col size="3" class="list_table_content">
+          <ion-thumbnail class="img_thmb">
+            <img [src]="'https://vps-1663776-x.dattaweb.com/' + pub.img" alt="{{pub.descripcion}}"
+              class="img_product">
+          </ion-thumbnail>
+        </ion-col>
+
+        <ion-col size="5" class="list_table_content ion-text-left">
+          <ion-label color="primary">
+            {{pub.nombre}}
+            <p *ngIf="pub.stock >= 8"><b>stock: <ion-chip color="success">{{pub.stock}}</ion-chip></b></p>
+            <p *ngIf="pub.stock >= 5 && pub.stock < 8"><b>stock: <ion-chip color="warning">{{pub.stock}}
+                </ion-chip></b></p>
+            <p *ngIf="pub.stock <= 4 && pub.stock > 0"><b>stock: <ion-chip color="primary">{{pub.stock}}
+                </ion-chip></b></p>
+            <p *ngIf="pub.stock <= 0"><b>stock: <ion-chip>{{pub.stock}}</ion-chip></b></p>
+          </ion-label>
+        </ion-col>
+
+
+        <ion-col size="4" class="list_table_content">
+          <ion-button fill="outline" class="etapas ion-no-padding" (click)="goToEtapa(pub._id)">
+            Etapas
+          </ion-button>
+          <br>
+          <ion-buttons class="block">
+            <ion-button color="primary" (click)="presentPopover($event, pub)">
+              <ion-icon name="ellipsis-horizontal-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <!-- <ion-button fill="clear" (click)="presentPopover($event, pub)" class="opciones ion-no-padding">
+          <ion-icon name="ellipsis-horizontal-outline" slot="end" size="medium"></ion-icon>
+        </ion-button> -->
+        </ion-col>
+
+      </ion-row>
+    </ng-container>
+  </ng-container>
+
+
+
+
+  <ng-container *ngIf="status_2 === 'incompleto'">
+
+    <ion-card class="ion-text-center">
+      <ion-card-title class="ion-padding">
+        Paso 1: Habilitando Mi Tienda
+      </ion-card-title>
+      <ion-card-subtitle class="ion-padding">
+        Necesitamos algunos datos para poder habilitar tu tienda, (solo usaremos esta información
+        para comunicarnos con vos, no será una información publica, excepto tu Nombre y Apellidos para que tus
+        clientes
+        se puedan comunicar con vos correctamente). (****** PARA VER *******)
+      </ion-card-subtitle>
+      <ion-card-content class="ion-padding">
+        <ion-button shape="round" color="tertiary" (click)="goToV()">
+          <b>GENIAL</b>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+
+  </ng-container>
+
+</ion-content>
+
+<ion-footer *ngIf="status === 'ok' || status === 'cero'">
+  <ion-row>
+    <ion-col size="12">
+      <ion-button expand="block" shape="round" (click)="addNew()" color="primary">
+        <b>Nueva Publicación</b>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

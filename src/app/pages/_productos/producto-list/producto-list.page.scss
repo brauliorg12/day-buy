@@ -1,0 +1,130 @@
+.list_table_header {
+  border: 0.5px solid rgb(194, 194, 194);
+  // background-color: rgb(199, 47, 47); ROJO
+  background-color: #0f4c94;
+  color: rgb(255, 255, 255);
+}
+
+.list_table_content {
+  border: 1px solid #ffdcdc;
+  background-color: rgb(255, 255, 255);
+}
+
+.btn_table,
+.btn_more {
+  display: block;
+  text-align: center;
+}
+
+.list_table_content {
+  ion-chip {
+    font-size: 18px;
+  }
+}
+
+.etapas {
+  font-weight: bold;
+  letter-spacing: 0.2 !important;
+  --padding-start: 0.5rem !important;
+  --padding-end: 0.5rem !important;
+}
+
+.opciones {
+  --padding-start: 0.5rem !important;
+  --padding-end: 0.5rem !important;
+}
+
+.label_add {
+  text-align: center;
+  font-size: 1rem;
+  display: block;
+  padding-top: 1rem;
+}
+
+.card_transf {
+  border: 2px solid #f1a223df;
+}
+
+.btns_transf {
+  margin-left: 0;
+}
+
+.icon_pay {
+  vertical-align: middle;
+  padding-right: 1rem;
+}
+
+ion-card-subtitle {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.admin_desc_text {
+  font-size: 15px;
+}
+
+.icon_stats {
+  vertical-align: middle;
+}
+.visitas_div {
+  display: block;
+  padding-top: 0.2rem;
+}
+
+.visitas {
+  background-color: rgba(218, 91, 18, 0.5);
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  display: inline-block;
+}
+
+.shares {
+  background-color: rgba(18, 128, 218, 0.555);
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  display: inline-block;
+}
+
+.fecha_valida {
+  background-color: rgba(55, 172, 75, 0.705);
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  display: block;
+}
+
+.fecha_vencida {
+  background-color: rgba(199, 47, 47, 0.705);
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  display: block;
+}
+
+.no_vence {
+  background-color: rgba(15, 77, 148, 0.705);
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  display: block;
+}
+
+.img_thmb {
+  display: contents;
+}
+
+.img_product {
+  max-height: 100px !important;
+}

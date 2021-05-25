@@ -1,0 +1,125 @@
+ion-card,
+.slides_home {
+  height: 100%;
+  width: 100%;
+}
+
+.slide_image_home {
+  margin: 0;
+}
+
+img {
+  height: 200px;
+}
+
+.info_footer {
+  position: absolute !important;
+  bottom: 52px !important;
+}
+
+.obj_fit {
+  object-fit: cover !important;
+}
+
+.divider {
+  --color: #e35252 !important;
+}
+
+.toolbar_footer {
+  position: absolute;
+  bottom: 0;
+  background: #f7f7f7;
+}
+
+.comprar_text {
+  text-transform: capitalize;
+  font-weight: bold;
+  letter-spacing: 0 !important;
+}
+
+.pricing_text_footer {
+  background-color: #ffffff;
+  border-radius: 5px;
+  height: 35px;
+}
+
+.precio_tachado {
+  text-decoration: line-through;
+  padding-right: 0.5rem;
+}
+
+.porciento_tachado {
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.info {
+  margin: 0.5rem;
+  border: 1px #e35252 solid;
+  border-radius: 15px;
+}
+
+.btn_stock {
+  display: inherit;
+  padding-bottom: 0.2rem;
+}
+
+.stock_home {
+  font-size: 11px;
+  margin-top: 0.5rem;
+  text-transform: capitalize;
+}
+
+.stock_home_foot {
+  font-size: 12px;
+  margin-bottom: 0.2rem;
+  text-transform: capitalize;
+}
+
+.chip_actual {
+  font-size: 25px;
+}
+
+.label_wait {
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
+// CURRENCY
+.price {
+  display: inline-block;
+}
+
+.price::first-letter {
+  padding-right: 0 !important;
+  margin: 0 !important;
+}
+
+#clockdiv {
+  font-family: sans-serif;
+  color: rgb(78, 78, 78);
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  font-size: 20px;
+}
+
+#clockdiv > div {
+  padding: 2px;
+  margin-left: 0.2rem;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 0.2rem;
+}
+
+#clockdiv div > span {
+  padding: 2px;
+  border-radius: 3px;
+  color: rgb(78, 78, 78);
+  display: inline-block;
+}
+
+.smalltext {
+  padding-top: 5px;
+  font-size: 10px;
+}

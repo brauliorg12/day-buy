@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>Mi Perfil</ion-title>
+    </ion-buttons>
+
+    <div *ngIf="status !== 'loading'" class="ion-float-right">
+      <ion-tab-button (click)="logout()">
+        <ion-icon name="exit" class="blanco"></ion-icon>
+        <ion-text class="blanco">Salir</ion-text>
+      </ion-tab-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="status === 'loading'">
+  <ion-row class="center ion-text-center">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+</ion-content>
+
+
+<ion-content *ngIf="status !== 'loading'">
+
+  <ion-row class="top-2">
+
+    <ion-col size="12" class="ion-text-center">
+      <ion-icon name="person" class="icon_profile" color="primary"></ion-icon>
+    </ion-col>
+
+  </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+        <ion-list>
+
+          <ion-item lines="inset">
+            <ion-label position="floating" color="primary" class="text_floating">Email</ion-label>
+            <ion-input name="email" type="email" [(ngModel)]="user.email" required readonly></ion-input>
+          </ion-item>
+
+          <ion-item lines="inset">
+            <ion-label position="floating" color="primary" class="text_floating">Nombre</ion-label>
+            <ion-input name="nombre" type="text" [(ngModel)]="user.nombre" required readonly></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="status === 'fb'" lines="none">
+            <ion-icon name="logo-facebook" class="icon_fb"></ion-icon>&nbsp;&nbsp;
+            <ion-label>
+              <h2>Conectado con Facebook</h2>
+            </ion-label>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+</ion-content>

@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-title>Agregar imágen</ion-title>
+    </ion-buttons>
+
+    <div class="ion-float-right">
+      <ion-tab-button (click)="closeModal()">
+        <ion-icon name="close" class="help_toolbar"></ion-icon>
+        <ion-text class="help_toolbar">Cerrar</ion-text>
+      </ion-tab-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <!----------------------------------- WEB ------------------------------------->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngIf="!photoInput.value">
+        <ion-button shape="round" (click)="photoInput.click()" color="tertiary">
+          <ion-icon slot="start" name="image"></ion-icon>
+          Añadir
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="!photoInput.value">
+        <ion-button shape="round" (click)="closeModal()" color="tertiary">
+          <ion-icon slot="start" name="close"></ion-icon>
+          Cancelar
+        </ion-button>
+      </ion-col>
+
+
+      <ion-col size="6" class="col_file">
+        <input type="file" id="file" hidden class="d-none" (change)="fileChangeEvent($event)" #photoInput>
+
+        <ion-button *ngIf="photoInput.value && failed === false" (click)="closeSelect()" shape="round" color="tertiary">
+          <ion-icon slot="start" name="checkmark"></ion-icon>
+          Aceptar
+        </ion-button>
+
+      </ion-col>
+
+      <ion-col size="6" class="col_file">
+        <ion-button *ngIf="photoInput.value" shape="round" (click)="photoInput.click()" color="tertiary">
+          <ion-icon slot="start" name="image"></ion-icon>
+          Cambiar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row *ngIf="photoInput.value && failed === false">
+      <br>
+      <ion-col size="12" class="col_image_edit">
+        <ion-list no-lines>
+          <ion-label color="tertiary" class="list_no_lines">La imágen será la que está en el recuadro</ion-label>
+        </ion-list>
+        <ion-card class="nopadding">
+
+          <!-- <ion-button (click)="rotateRight()">
+            <ion-icon name="repeat-sharp"></ion-icon>
+          </ion-button>
+          <ion-button (click)="flipHorizontal()">
+            <ion-icon name="swap-horizontal"></ion-icon>
+          </ion-button>
+          <ion-button (click)="flipVertical()">
+            <ion-icon name="swap-vertical"></ion-icon>
+          </ion-button> -->
+
+          <div *ngIf="status === 'loading'" class="spinner_refresh ion-padding">
+            <ion-spinner name="crescent"></ion-spinner>
+            <ion-label>
+              <ion-icon name="images"></ion-icon>&nbsp;Cargando... Por favor espere.
+            </ion-label>
+          </div>
+
+          <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+            [resizeToWidth]="500" format="jpeg" [cropperMinWidth]="128" [imageQuality]="100" [onlyScaleDown]="true"
+            [roundCropper]="false" outputType="file" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (loadImageFailed)="loadImageFailed()" [style.display]="showCropper ? null : 'none'" [alignImage]="'left'">
+          </image-cropper>
+
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+
+    <ng-container *ngIf="failed === true">
+
+      <p class="text_img_error">
+        <ion-icon name="alert"></ion-icon>Elija un formáto de imágen correcto: png, jpg, jpeg
+      </p>
+
+    </ng-container>
+
+  </ion-grid>
+
+</ion-content>

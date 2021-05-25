@@ -1,0 +1,293 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title size="small">
+      <ng-lottie [options]="options" width="25px" height="25px" containerClass="lottie">
+      </ng-lottie>
+      <b>
+        Tu Tiempo Vale!
+      </b>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)" overflow-scroll="true">
+
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="80" pullMax="300"
+    (ionRefresh)="recargarms($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-slides pager="true" #slideshome [options]="slideManyOpts" class="slides_home pointer"
+    (ionSlideDidChange)="slideChanged()">
+    <ng-container *ngIf="offers.length >= 1">
+      <ion-slide *ngFor="let item of offers">
+        <ion-card class="slide_image_home">
+          <img (click)="viewPhoto('http://vps-1663776-x.dattaweb.com/' + item.img)"
+            [src]="'http://vps-1663776-x.dattaweb.com/' + item.img" class="obj_fit" />
+
+          <ion-card-subtitle size="small"><b>{{item.nombre}}</b></ion-card-subtitle>
+
+          <ion-card-content>
+            {{item.descripcion}}
+          </ion-card-content>
+
+          <ion-grid class="info_footer">
+
+            <ion-row class="info">
+              <ion-col size="9">
+
+
+                <ion-label color="primary">
+                  Descuento actual:
+                </ion-label>
+
+                <br>
+
+                <div id="clockdiv">
+                  <div>
+                    <span>
+                      <ion-text class="porciento_tachado">15%</ion-text>
+                    </span>
+                    <div class="smalltext">Anterior</div>
+                  </div>
+
+                  <div>
+                    <span>
+                      <ion-text class="porciento_tachado">20%</ion-text>
+                    </span>
+                    <div class="smalltext">Anterior</div>
+                  </div>
+
+                  <div>
+                    <span color="success">
+                      <ion-text color="success"><b>{{item.descuento}}%</b></ion-text>
+                    </span>
+                    <div class="smalltext chip_actual">Ahora</div>
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="3" class="ion-no-padding">
+                <ion-title class="ion-no-padding btn_stock">
+                  <ion-title class="stock_home ion-no-padding"><b>Unidades</b></ion-title>
+                  <ion-title class="stock_home_foot ion-no-padding"><b>Disponibles</b></ion-title>
+                  <ion-title color="success" class="ion-no-padding"><b>{{item.stock}}</b></ion-title>
+                </ion-title>
+              </ion-col>
+
+
+
+              <ion-item-divider class="divider"></ion-item-divider>
+
+              <ion-col size="9">
+
+                <ion-label color="primary">
+                  Próximo descuento en:
+                </ion-label>
+
+                <br>
+
+                <ng-container>
+
+                  <div id="clockdiv">
+
+                    <app-countdown timing="{{now}}" time="{{item.fecha_fin_etapa}}" item="{{item._id}}"></app-countdown>
+
+                    <!-- <timerc [dtid]="item.fecha_fin_etapa"></timerc> -->
+
+                    <!-- <div>
+                      <span *ngIf="item.hours > 0">{{item.hours}}</span>
+                      <span *ngIf="item.hours <= 0">0</span>
+                      <ion-spinner *ngIf="status === 'loading'" class="spinner_small" color="primary"></ion-spinner>
+                      <div class="smalltext">Horas</div>
+                    </div>
+
+                    <div>
+                      <span *ngIf="item.minutes > 0" class="minutes">{{item.minutes}}</span>
+                      <span *ngIf="item.minutes <= 0">0</span>
+                      <ion-spinner *ngIf="status === 'loading'" class="spinner_small" color="primary"></ion-spinner>
+                      <div class="smalltext">Minutos</div>
+                    </div>
+                    <div>
+                      <span *ngIf="item.seconds > 0" class="seconds">{{item.seconds}}</span>
+                      <span *ngIf="item.seconds <= 0">0</span>
+                      <ion-spinner *ngIf="status === 'loading'" class="spinner_small" color="primary"></ion-spinner>
+                      <div class="smalltext">Segundos</div>
+                    </div> -->
+                  </div>
+                </ng-container>
+              </ion-col>
+
+              <ion-col size="3" class="ion-no-padding">
+                <ion-title class="ion-no-padding btn_stock">
+                  <ion-title class="stock_home ion-no-padding"><b>Próximo</b></ion-title>
+                  <ion-title class="stock_home_foot ion-no-padding"><b>Descuento</b></ion-title>
+                  <ion-title class="ion-no-padding" color="warning"><b>30%</b></ion-title>
+                </ion-title>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+          <ion-toolbar class="toolbar_footer">
+            <ion-buttons slot="start" class="pricing_text_footer ion-no-padding">
+              <ion-title color="medium" size="small" class="precio_tachado">${{item.precio_final |number:'1.2-2'}}
+              </ion-title>
+              <ion-title color="primary" class="ion-no-padding">
+                <b>${{ (item.precio_final - (item.precio_final * (item.descuento / 100))) |number:'1.2-2'}}</b>
+              </ion-title>
+            </ion-buttons>
+
+            <ion-buttons slot="end" class="ion-padding">
+              <ion-button color="primary" fill="solid">
+                <ion-text class="comprar_text">Comprar</ion-text>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+
+        </ion-card>
+      </ion-slide>
+    </ng-container>
+
+    <!-- <ion-slide>
+      <ion-card class="slide_image_home">
+        <img (click)="viewPhoto('http://vps-1663776-x.dattaweb.com/uploads/update/default2.jpg')"
+          src="http://vps-1663776-x.dattaweb.com/uploads/update/default2.jpg" class="obj_fit" />
+
+        <ion-card-subtitle size="small"><b>nombre de Producto</b></ion-card-subtitle>
+
+        <ion-card-content>
+          Descripción de prueba , de producto de prueba.
+          Descripción de prueba , de producto de prueba.
+        </ion-card-content>
+
+        <ion-grid class="info_footer">
+
+          <ion-row class="info">
+            <ion-col size="9">
+
+
+              <ion-label color="primary">
+                Descuento actual:
+              </ion-label>
+
+              <br>
+
+              <div id="clockdiv">
+                <div>
+                  <span>
+                    <ion-text class="porciento_tachado">15%</ion-text>
+                  </span>
+                  <div class="smalltext">Anterior</div>
+                </div>
+
+                <div>
+                  <span>
+                    <ion-text class="porciento_tachado">20%</ion-text>
+                  </span>
+                  <div class="smalltext">Anterior</div>
+                </div>
+
+                <div>
+                  <span color="success">
+                    <ion-text color="success"><b>25%</b></ion-text>
+                  </span>
+                  <div class="smalltext chip_actual">Ahora</div>
+                </div>
+              </div>
+            </ion-col>
+
+            <ion-col size="3" class="ion-no-padding">
+              <ion-title class="ion-no-padding btn_stock">
+                <ion-title class="stock_home ion-no-padding"><b>Unidades</b></ion-title>
+                <ion-title class="stock_home_foot ion-no-padding"><b>Disponibles</b></ion-title>
+                <ion-title color="success" class="ion-no-padding"><b>15</b></ion-title>
+              </ion-title>
+            </ion-col>
+
+
+
+            <ion-item-divider class="divider"></ion-item-divider>
+
+            <ion-col size="9">
+
+              <ion-label color="primary">
+                Próximo descuento en:
+              </ion-label>
+
+              <br>
+
+              <ng-container>
+
+                <div id="clockdiv">
+
+                  <div>
+                    <span *ngIf="horas.length">{{horas}}</span>
+                    <ion-spinner *ngIf="!horas.length" class="spinner_small" color="primary"></ion-spinner>
+                    <div class="smalltext">Horas</div>
+                  </div>
+
+                  <div>
+                    <span *ngIf="horas.length" class="minutes">{{minutos}}</span>
+                    <ion-spinner *ngIf="!horas.length" class="spinner_small" color="primary"></ion-spinner>
+                    <div class="smalltext">Minutos</div>
+                  </div>
+                  <div>
+                    <span *ngIf="horas.length" class="seconds">{{segundos}}</span>
+                    <ion-spinner *ngIf="!horas.length" class="spinner_small" color="primary"></ion-spinner>
+                    <div class="smalltext">Segundos</div>
+                  </div>
+                </div>
+              </ng-container>
+            </ion-col>
+
+            <ion-col size="3" class="ion-no-padding">
+              <ion-title class="ion-no-padding btn_stock">
+                <ion-title class="stock_home ion-no-padding"><b>Próximo</b></ion-title>
+                <ion-title class="stock_home_foot ion-no-padding"><b>Descuento</b></ion-title>
+                <ion-title class="ion-no-padding" color="warning"><b>30%</b></ion-title>
+              </ion-title>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
+
+        <ion-toolbar class="toolbar_footer">
+          <ion-buttons slot="start" class="pricing_text_footer">
+            <ion-title color="medium" size="small" class="precio_tachado">$6200.00</ion-title>
+            <ion-title color="primary"><b>$4200.00</b></ion-title>
+          </ion-buttons>
+
+          <ion-buttons slot="end" class="ion-padding">
+            <ion-button color="primary" fill="solid">
+              <ion-text class="comprar_text">Comprar</ion-text>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-card>
+    </ion-slide> -->
+  </ion-slides>
+
+  <!--<ng-container *ngIf="status === 'loading' && status_2 === 'loading'">-->
+  <ng-container *ngIf="status === 'loading'">
+    <ion-row class="center">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </ion-row>
+  </ng-container>
+
+  <!--<ng-container *ngIf="status === 'cero' && status_2 === 'ok'">-->
+  <ng-container *ngIf="status === 'cero'">
+    <div class="ion-text-left ion-padding">
+      <ion-label class="label_add center" color="medium">
+        <b>No hay Publicaciones disponibles</b>
+      </ion-label>
+    </div>
+  </ng-container>
+
+</ion-content>

@@ -1,0 +1,390 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>Publicación</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <div class="ion-float-right">
+        <ion-tab-button (click)="delete()">
+          <ion-icon name="trash" class="blanco"></ion-icon>
+          <ion-text class="blanco">Eliminar</ion-text>
+        </ion-tab-button>
+      </div>
+
+      <!-- <div class="ion-float-right">
+        <ion-tab-button (click)="presentPopover($event)">
+          <ion-icon name="help" color="light"></ion-icon>
+          <ion-text color="light">Ayuda</ion-text>
+        </ion-tab-button>
+      </div> -->
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="status === 'loading'">
+  <ion-row class="center">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+</ion-content>
+
+<ion-content *ngIf="status === 'error'" class="ion-text-center">
+  <ion-label color="primary" class="center">
+    <b>Error al cargar!</b>
+
+    <ion-text>Vuelva a intentarlo nuevamente.</ion-text>
+  </ion-label>
+</ion-content>
+
+<ion-content *ngIf="status === 'ok'">
+
+  <form [formGroup]="offerForm" novalidate>
+
+    <!-------------------------------------------- ADMIN --------------------------------------------------------->
+
+    <ion-card *ngIf="moderator === 'admin' || moderator === 'admin'">
+      <ion-item>
+        <ion-label>
+          <ion-icon class="icon_addi" name="globe" color="primary"></ion-icon>Publicada
+        </ion-label>
+        <ion-toggle formControlName="status" (ionChange)="statusCommerce()" checked="{{offerForm.get('status').value}}">
+        </ion-toggle>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>
+          <ion-icon class="icon_addi" name="ribbon" color="warning"></ion-icon>Premium
+        </ion-label>
+        <ion-toggle formControlName="premium" (ionChange)="premiumCommerce()"
+          checked="{{offerForm.get('premium').value}}"></ion-toggle>
+      </ion-item>
+    </ion-card>
+
+
+
+
+
+    <!--------------------------------------- TITULO Y DESCRIPCION ---------------------------------------------->
+
+    <ion-card>
+      <ion-list no-lines>
+        <ion-label color="primary" class="list_no_lines">
+          <b>Nombre:
+            <ion-text *ngIf="!offerForm.get('nombre').valid" color="danger"> *</ion-text>
+            <ion-icon *ngIf="offerForm.get('nombre').valid" name="checkmark-circle" color="success" class="icon_check">
+            </ion-icon>
+          </b>
+        </ion-label>
+      </ion-list>
+
+      <ion-item>
+        <ion-icon name="reorder-two-sharp" color="primary" class="icon_input"></ion-icon>&nbsp;&nbsp;&nbsp;
+        <ion-input type="text" formControlName="nombre" autocapitalize="on" autoGrow="true"
+          placeholder="Ej: Remera adidas talle M" maxlength="35"></ion-input>
+      </ion-item>
+
+
+
+      <ion-text
+        *ngIf="offerForm.get('nombre').errors && (offerForm.get('nombre').dirty || offerForm.get('nombre').touched)"
+        color="danger" class="error">&nbsp;
+        <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mínimo 5 caracteres
+      </ion-text>
+
+    </ion-card>
+
+
+
+    <ion-card>
+      <ion-list no-lines>
+        <ion-label color="primary" class="list_no_lines"><b>Descripción:
+            <ion-text *ngIf="!offerForm.get('descripcion').valid" color="danger">*</ion-text>
+            <ion-icon *ngIf="offerForm.get('descripcion').valid" name="checkmark-circle" color="success"
+              class="icon_check"></ion-icon>
+          </b>
+        </ion-label>
+      </ion-list>
+
+      <ion-item>
+        <ion-icon name="reorder-four-sharp" color="primary" class="icon_input"></ion-icon>&nbsp;&nbsp;&nbsp;
+        <ion-textarea #input_desc type="text" formControlName="descripcion" autocapitalize="on" autoGrow="true"
+          placeholder="describí tu producto/servicio, NO incluyas datos de contacto." maxlength="1000" class="tare_des">
+        </ion-textarea>
+      </ion-item>
+
+
+
+      <ion-text
+        *ngIf="offerForm.get('descripcion').errors && (offerForm.get('descripcion').dirty || offerForm.get('descripcion').touched)"
+        class="error">&nbsp;
+        <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mínimo 10 caracteres
+      </ion-text>
+    </ion-card>
+
+
+
+    <!------   CATS -------->
+    <ion-card>
+      <ion-item class="item_cat">
+        <ion-label position="floating" color="primary" class="text_floating font_seis">Categorías:
+          <ion-text *ngIf="!offerForm.get('categoria').valid" color="danger" class="text_cat"> (* elegí mínimo
+            una)
+          </ion-text>
+          <ion-icon *ngIf="offerForm.get('categoria').valid" name="checkmark-circle" color="success" class="icon_check">
+          </ion-icon>
+        </ion-label>
+        <ion-select formControlName="categoria" multiple="true" cancelText="Cancelar" interface="alert"
+          [interfaceOptions]="customAlertOptionsBussines">
+          <ion-select-option *ngFor="let cat of cats" value="{{cat}}">{{cat}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+
+
+
+
+    <!-------------------------------------------  SLIDE FOTO Y TAGS  ------------------------------------------>
+
+    <span class="card_desc_img"></span>
+
+    <ion-card>
+      <ion-list no-lines>
+        <ion-label color="primary" class="list_no_lines"><b>Imágen principal:</b>
+          <ion-text *ngIf="!offerForm.get('img').valid" color="danger" class="text_cat"> (* obligatorio)
+          </ion-text>
+          <ion-icon *ngIf="offerForm.get('img').valid" name="checkmark-circle" color="success" class="icon_check">
+          </ion-icon>
+        </ion-label>
+      </ion-list>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="col_file">
+            <input type="text" hidden class="d-none" #photoInput formControlName="img">
+            <ion-button *ngIf="!photoInput.value" shape="round" (click)="photoInput.click()" (click)="pickImage()"
+              color="primary">
+              <ion-icon slot="start" name="image"></ion-icon>
+              Añadir +
+            </ion-button>
+
+            <ion-button *ngIf="photoInput.value" shape="round" (click)="photoInput.click()" (click)="pickImage()"
+              color="primary">
+              <ion-icon slot="start" name="image"></ion-icon>
+              Cambiar
+            </ion-button>
+          </ion-col>
+
+          <ion-col class="col_img">
+            <ion-thumbnail class="img_commerce_actual">
+              <ion-img [src]="photoSelected || 'https://vps-1663776-x.dattaweb.com/' + offerForm.get('img').value"
+                class="img_add img_normal">
+              </ion-img>
+            </ion-thumbnail>
+          </ion-col>
+
+
+
+        </ion-row>
+
+        <ion-item-divider class="divider"></ion-item-divider>
+
+
+        <ion-item class="ion-activatable ion-text-left" lines="none" routerLink="/producto-gallery/{{producto._id}}">
+          <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          <ion-icon name="images-outline" color="primary"></ion-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-label>
+            <h2>Galería de imágenes</h2>
+          </ion-label>
+
+          <ion-badge id="cart-badge">nuevo
+          </ion-badge>
+        </ion-item>
+
+      </ion-grid>
+    </ion-card>
+
+
+    <!---------------------------------------------- PRECIOS ------------------------------------------------------>
+
+    <ion-card *ngIf="pesos === false">
+      <ion-list no-lines>
+        <ion-label color="primary" class="list_no_lines" [ngClass]="promo"><b>Precio: </b>
+          <ion-text *ngIf="!offerForm.get('precio_final').valid" color="danger"> *</ion-text>
+          <ion-icon *ngIf="offerForm.get('precio_final').valid && offerForm.get('precio_valid').valid"
+            name="checkmark-circle" color="success" class="icon_check">
+          </ion-icon>
+        </ion-label>
+      </ion-list>
+
+      <ion-item>
+        <ion-label>
+          <ion-icon src="/assets/icon/attach_money-24px.svg" color="primary" class="icon_input"></ion-icon>
+        </ion-label>
+
+        <ion-input #input_precio type="tel" maxlength="6" pattern="\d*" formControlName="precio_final"
+          (ionChange)="check_precio()">
+        </ion-input>
+      </ion-item>
+
+      <ion-text
+        *ngIf="offerForm.get('precio_final').errors && (offerForm.get('precio_final').dirty || offerForm.get('precio_final').touched)"
+        color="danger" class="error">&nbsp;
+        <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Solo números.
+      </ion-text>
+
+      <ion-text *ngIf="offerForm.get('precio_valid').value === null" color="danger" class="error">&nbsp;
+        <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Ingrese el precio real.
+      </ion-text>
+    </ion-card>
+
+
+    <ng-container *ngIf="pesos === true">
+      <ion-card>
+        <ion-list no-lines>
+          <ion-label color="primary" class="list_no_lines" [ngClass]="promo"><b>Precio: </b>
+            <ion-text *ngIf="!offerForm.get('precio_inicial').valid || !offerForm.get('precio_valid2').valid"
+              color="danger"> *</ion-text>
+            <ion-icon *ngIf="offerForm.get('precio_inicial').valid && offerForm.get('precio_valid2').valid"
+              name="checkmark-circle" color="success" class="icon_check">
+            </ion-icon>
+          </ion-label>
+        </ion-list>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon src="/assets/icon/attach_money-24px.svg" color="primary" class="icon_input"></ion-icon>
+          </ion-label>
+
+          <ion-input #input_precio_con type="tel" maxlength="6" pattern="\d*" formControlName="precio_inicial"
+            (ionChange)="check_precio_con_oferta()">
+          </ion-input>
+        </ion-item>
+
+        <ion-text *ngIf="offerForm.get('precio_inicial').errors && (offerForm.get('precio_inicial').dirty ||
+                 offerForm.get('precio_inicial').touched)" color="danger" class="error">&nbsp;
+          <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Solo números.
+        </ion-text>
+
+        <ion-text *ngIf="offerForm.get('precio_valid2').value === null" color="danger" class="error">&nbsp;
+          <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Ingrese el precio real.
+        </ion-text>
+
+      </ion-card>
+
+
+      <ion-card>
+        <ion-list no-lines>
+          <ion-label color="primary" class="list_no_lines"><b>Precio de oferta en CoDi: </b>
+            <ion-text *ngIf="!offerForm.get('precio_final').valid" color="danger"> *</ion-text>
+            <ion-icon *ngIf="offerForm.get('precio_final').valid && offerForm.get('precio_oferta').valid"
+              name="checkmark-circle" color="success" class="icon_check">
+            </ion-icon>
+          </ion-label>
+        </ion-list>
+
+        <ion-item>
+          <ion-label>
+            <ion-icon src="/assets/icon/attach_money-24px.svg" color="primary" class="icon_input"></ion-icon>
+          </ion-label>
+
+          <ion-input #input_promo type="tel" maxlength="6" pattern="\d*" formControlName="precio_final"
+            (ionChange)="check_precio_oferta()">
+          </ion-input>
+
+          <ion-icon name="close" color="primary" class="icon_input" (click)="close()"></ion-icon>
+        </ion-item>
+
+        <ion-text
+          *ngIf="offerForm.get('precio_final').errors && (offerForm.get('precio_final').dirty || offerForm.get('precio_final').touched)"
+          color="danger" class="error">&nbsp;
+          <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Solo números.
+        </ion-text>
+
+        <ion-text *ngIf="offerForm.get('precio_oferta').value === null" color="danger" class="error">&nbsp;
+          <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Ingrese el precio real.
+        </ion-text>
+      </ion-card>
+    </ng-container>
+
+
+
+
+    <!-------------------------------------------- CANTIDAD --------------------------------------------->
+
+    <ion-card class="card_add">
+      <ion-list no-lines>
+        <ion-label color="primary" class="list_no_lines" [ngClass]="promo"><b>Stock disponible: </b>
+          <ion-text *ngIf="!offerForm.get('stock').valid" color="danger"> *
+          </ion-text>
+          <ion-icon *ngIf="offerForm.get('stock').valid && offerForm.get('stock_valid').valid" name="checkmark-circle"
+            color="success" class="icon_check">
+          </ion-icon>
+        </ion-label>
+      </ion-list>
+
+      <ion-item>
+        <div *ngIf="offerForm.get('stock').value > 1" class="ion-activatable">
+          <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          <ion-icon name="remove-circle" color="primary" class="icon_add" (click)="decrement()"></ion-icon>
+        </div>
+
+        <div *ngIf="offerForm.get('stock').value <= 1">
+          <ion-icon name="remove-circle" class="icon_add" color="medium"></ion-icon>
+        </div>
+
+        <ion-input #input_s type="tel" pattern="\d*" maxlength="4" minlength="1" class="input_add"
+          value="offerForm.get('stock').value" formControlName="stock" (ionChange)="check_stock()">
+        </ion-input>
+
+        <div class="ion-activatable">
+          <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          <ion-icon name="add-circle" color="primary" class="icon_add" (click)="increment()"></ion-icon>
+        </div>
+      </ion-item>
+
+      <ion-text *ngIf="!offerForm.get('stock').valid" class="error">&nbsp;
+        <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Sólo números
+      </ion-text>
+
+      <ion-text *ngIf="offerForm.get('stock_valid').value === null" color="danger" class="error">&nbsp;
+        <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mayor a 0.
+      </ion-text>
+    </ion-card>
+
+
+
+    <!---------------------  Etiquetas -------------------->
+    <ion-card>
+      <ion-list no-lines>
+        <ion-label color="primary" class="list_no_lines"><b>Palabras clave (Etiquetas): </b>(opcional)
+        </ion-label>
+      </ion-list>
+
+      <ion-item>
+        <ion-icon name="search" color="primary" class="icon_input"></ion-icon>&nbsp;&nbsp;&nbsp;
+        <ion-textarea type="text" formControlName="etiquetas" autocapitalize="on" autoGrow="true"
+          placeholder="palabras separadas por coma ( , ). relacionadas a esta publicación para que la encuentren más facilmente"
+          maxlength="80"></ion-textarea>
+      </ion-item>
+    </ion-card>
+
+    <!--------------------------------------------------------------------------------------------------------------->
+
+  </form>
+
+</ion-content>
+
+<ion-footer *ngIf="status === 'ok'">
+  <ion-row>
+    <ion-col size="12">
+      <ion-button expand="block" shape="round" (click)="updateOfferNoImage()" [disabled]="!offerForm.valid"
+        color="primary">
+        <b>Modificar publicación</b>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

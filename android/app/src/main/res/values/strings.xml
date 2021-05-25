@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Day Buy</string>
+    <string name="title_activity_main">Day Buy</string>
+    <string name="package_name">io.ionic.daybuy</string>
+    <string name="custom_url_scheme">io.ionic.daybuy</string>
+</resources>

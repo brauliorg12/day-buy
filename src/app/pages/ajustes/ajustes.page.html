@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>Ajustes</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!----------------------------------------------  ADMIN  -------------------------------------------------------->
+  <ion-card>
+    <ion-list>
+
+      <ion-item class="ion-activatable" lines="inset" routerLink="/publicaciones-list">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="pricetags-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Publicaciones</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="ion-activatable" lines="inset">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="cash-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Ventas</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="ion-activatable" lines="inset" routerLink="/login">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="log-in-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Iniciar Sesión</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="ion-activatable" lines="inset" routerLink="/profile">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="person-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Perfil</h2>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+  </ion-card>
+
+</ion-content>
